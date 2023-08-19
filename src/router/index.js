@@ -6,7 +6,28 @@ function load(component) {
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
-  routes: [],
+  routes: [
+    {
+      path: '/',
+      name: 'Home',
+      component: load('Home'),
+    },
+    {
+      path: '/iphone',
+      name: 'Iphone',
+      component: load('ProductCard'),
+    },
+    {
+      path: '/payment',
+      name: 'Payment',
+      component: load('PaymentDevilery'),
+    },
+    {
+      path: '/contacts',
+      name: 'Contacts',
+      component: load('Contacts'),
+    },
+  ],
     
   mode: 'history'
 })

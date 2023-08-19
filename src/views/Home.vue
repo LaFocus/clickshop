@@ -1,10 +1,13 @@
 <template>
-    <div class="intro">
-        
-    </div>
+    <Intro />
+    <MainContent /> 
 </template>
 
 <script setup>
+import Intro from '@/components/Intro/Intro.vue'
+import MainContent from '@/components/Main/MainContent.vue'
+
+
 
 </script>
 

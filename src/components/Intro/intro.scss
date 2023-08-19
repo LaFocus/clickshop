@@ -1,0 +1,53 @@
+.intro {
+
+    &__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 84px;
+
+        &__info {
+            display: flex;
+            flex-direction: column;
+            gap: 58px;
+            align-items: flex-start;
+            position: relative;
+
+            &-logo {
+                font-size: 100px;
+                font-style: normal;
+                font-weight: 800;
+                line-height: normal;
+                text-transform: uppercase;
+            }
+
+            &-btn {
+                background: var(--price);
+                padding: 14px 45px;
+                color: #FFF;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                text-transform: uppercase;
+                border: none;
+            }
+            
+            &__dots {
+                display: flex;
+                align-items: center;
+                gap: 30px;
+                position: absolute;
+                bottom: 0;
+                right: 50%;
+                transform: translateX(-50%);
+                &-item {
+                    background: blue;
+                    width: 15px;
+                    height: 15px;
+                    border-radius: 50%;
+                }
+            }
+        }
+    }
+}
