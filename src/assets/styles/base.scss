@@ -20,3 +20,9 @@
     --white: white;
     --price: #030A8C;
 }
+
+@mixin media($size) {
+    @media screen and (max-width: #{$size}px) {
+        @content
+    }
+}
