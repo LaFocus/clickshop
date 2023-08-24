@@ -29,6 +29,10 @@
 <script setup>
 import MainGoods from '@/components/Main/MainGoods.vue';
 
+const filter = () => {
+    
+}
+
 </script>
 
 <style lang="scss" scoped></style>

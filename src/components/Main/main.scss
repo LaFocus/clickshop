@@ -67,7 +67,7 @@
                 height: 400px;
                 margin-bottom: 150px;
                 padding: 60px 0 0 40px;
-                
+
                 & h4 {
                     color: var(--price);
                     font-size: 30px;
@@ -89,7 +89,7 @@
                     max-width: 350px;
                     width: 100%;
                 }
-                
+
                 & img {
                     width: 90%;
                     position: absolute;
@@ -138,12 +138,17 @@
             &-item:hover {
                 background: var(--price);
                 color: white;
-
             }
+
+
         }
     }
 }
 
+.backArrow {
+    transform: rotateY(180deg);
+
+}
 
 .mainGoodsItem {
 

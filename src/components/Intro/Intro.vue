@@ -1,20 +1,20 @@
 <template>
     <div class="intro" v-if="getIndexStore">
-        <Swiper :slides-per-view="1" :space-between="50" :pagination="{ clickable: true }" :modules="modules">
-            <Swiper-slide v-for="(item, i) in getIndexStore.slice(10, 13)" :key="i">
-                <div class="container intro__inner">
-                    <div class="intro__inner__info">
-                        <h2 class="intro__inner__info-logo">
-                            {{ item.title }}
-                        </h2>
-                        <button class="intro__inner__info-btn">
-                            shop now
-                        </button>
-                    </div>
-                    <img :src="`${item.images[0]}`" alt="" class="intro__inner-img">
-                </div>
-            </Swiper-slide>
-        </Swiper>
+        <div class="container intro__inner">
+            <div class="intro__inner__info">
+                <h2 class="intro__inner__info-logo">
+                    iPhone 14 Pro Max
+                </h2>
+                <button class="intro__inner__info-btn">
+                    shop now
+                </button>
+            </div>
+            <Swiper :slides-per-view="1" :space-between="50" :pagination="{ clickable: true }" :modules="modules" class="intro__inner__slider">
+                <Swiper-slide v-for="(item, i) in 3" :key="i" class="intro__inner__slider-item">
+                    <img :src="getImageUrl(item)" alt="">
+                </Swiper-slide>
+            </Swiper>
+        </div>
     </div>
 </template>
 
@@ -28,10 +28,11 @@ import "swiper/scss";
 import 'swiper/scss/pagination';
 
 let modules = ref([Pagination])
-
 const indexStore = useIndex()
-
 let getIndexStore = computed(() => indexStore.resArray)
+function getImageUrl(name) {
+    return new URL(`../../assets/images/intro${name}.png`, import.meta.url).href
+}
 
 onMounted(() => {
     indexStore.getIndex()
