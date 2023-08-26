@@ -27,6 +27,11 @@ const router = createRouter({
       name: 'Contacts',
       component: load('Contacts'),
     },
+    {
+      path: '/productpage/:id',
+      name: 'ProductCard',
+      component: load('ProductCard')
+    },
   ],
     
   mode: 'history'

@@ -1,0 +1,154 @@
+.productCard {
+
+
+    &__inner {
+        display: flex;
+        align-items: flex-start;
+        margin-top: 76px;
+
+
+        &__images {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 74px;
+
+            &__thumbnails {
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+
+                &-item:hover {
+
+                    // &:hover {
+                    border: 1px var(--price);
+                    // }
+                }
+            }
+        }
+
+        &__info {
+
+            &-title {
+                color: #121211;
+                font-size: 25px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 150%;
+            }
+
+            &-price {
+                color: #030A8C;
+                // font-family: Questrial;
+                font-size: 25px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                margin: 40px 0 60px 0;
+            }
+
+            &-description span {
+                color: #030A8C;
+                // font-family: Questrial;
+                font-size: 25px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+            }
+
+            &-description p {
+                color: #3D3D3D;
+                // font-family: Questrial;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                max-width: 810px;
+                margin: 30px 0 133px 0;
+            }
+
+            &__btns {
+                display: flex;
+                align-items: center;
+
+                &__amount {
+                    display: flex;
+                    width: 119px;
+                    height: 38px;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    &-btn {
+                        width: 33px;
+                        background: #EAEAEA;
+                        border: none;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        height: 100%;
+                        outline: none;
+                    }
+
+                    & span {
+                        color: #3D3D3D;
+                        // font-family: Kanit;
+                        font-size: 20px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 10px;
+                    }
+                }
+
+                &-order {
+                    background: #030A8C;
+                    border: none;
+                    outline: none;
+                    color: #FFF;
+                    // font-family: Bruno Ace;
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: normal;
+                    padding: 14px 45px;
+                    margin: 0 50px 0 75px;
+                }
+
+                &-like {
+                    border: none;
+                    background: none;
+                    width: 24px;
+                    height: 24px;
+                }
+            }
+        }
+
+    }
+
+    &__recommendations {
+
+        &-title {
+            margin: 250px 0 160px 0;
+            color: #121211;
+            font-family: Questrial;
+            font-size: 25px;
+            font-style: normal;
+            font-weight: 400;
+            letter-spacing: 1.25px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        &__goods {
+            display: flex;
+            margin-bottom: 150px;
+            
+        }
+    }
+}
+
+
+.swiper-pagination {
+    text-align: left !important;
+    // transform: translateY(42px) !important;
+    
+}
