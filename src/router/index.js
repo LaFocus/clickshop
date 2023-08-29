@@ -32,6 +32,11 @@ const router = createRouter({
       name: 'ProductCard',
       component: load('ProductCard')
     },
+    {
+      path: '/productpage/shoppingcart',
+      name: 'Shoppingcart',
+      component: load('ShoppingCart')
+    },
   ],
     
   mode: 'history'

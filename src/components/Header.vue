@@ -13,7 +13,9 @@
             </ul>
 
             <div class="header__inner__right">
-                <img src="@/assets/images/cart.svg" alt="" class="header__inner__right-cart">
+                <router-link to="/productpage/shoppingcart">
+                    <img src="@/assets/images/cart.svg" alt="" class="header__inner__right-cart">
+                </router-link>
                 <button class="header__inner__right-btn"> Login </button>
             </div>
 
