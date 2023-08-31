@@ -1,12 +1,12 @@
 <template>
     <div class="shoppingCart__inner__main__cards-item">
-        <img src="@/assets/images/goodsitem.png" alt="" class="shoppingCart__inner__main__cards-item-img">
+        <img :src="item.images[0]" alt="" class="shoppingCart__inner__main__cards-item-img">
         <div class="shoppingCart__inner__main__cards-item-info">
-            <h3>Samsung GalaxyA52 White 128Gb</h3>
-            <p>SKU. SNKM10001-001</p>
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
         </div>
         <div class="shoppingCart__inner__main__cards-item-price">
-            $119.00
+            ${{ item.price }}
         </div>
         <div class="shoppingCart__inner__main__cards-item-btns">
             <button class="shoppingCart__inner__main__cards-item-btns-btn">-</button>
@@ -23,7 +23,12 @@
 </template>
 
 <script setup>
-
+const props = defineProps({
+    item: {
+        type: Object,
+        requaired: true,
+    }
+})
 </script>
 
 <style lang="scss" scoped></style>

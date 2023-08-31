@@ -60,7 +60,6 @@ computed(() => {
 onMounted(async () => {
     await indexStore.getIndex()
     allProds.value = getIndexStore.value
-
 })
 
 </script>

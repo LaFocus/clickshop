@@ -14,8 +14,9 @@ export const useIndex = defineStore('index',{
             const data = res.data.products
             this.resArray = data
         } catch (error) {
-            console.log('Ошибка при получении актеров', error);
+            console.log('Ошибка при получении товаров', error);
         }
        }
+       
     }
 })

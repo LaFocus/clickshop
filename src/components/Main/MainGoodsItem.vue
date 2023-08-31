@@ -15,9 +15,14 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
+import { onMounted, computed } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { useItemInfo } from "@/stores/itemInfo.js";
 
-
+const itemInfoStore = useItemInfo()
+const itemInfo = computed(() => itemInfoStore.itemInfo)
+const route = useRoute();
+const id = route.params.id
 const props = defineProps({
     item: {
         type: Object,
@@ -25,7 +30,12 @@ const props = defineProps({
     }
 })
 
-onMounted(() => {
+onMounted(async () => {
+    if (route.params.id) {
+        await itemInfoStore.getItemInfo(id)
+        // console.log(id);
+        // console.log(itemInfo.value);
+    }
 })
 
 </script>

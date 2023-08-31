@@ -17,6 +17,12 @@
                 display: flex;
                 flex-direction: column;
                 gap: 30px;
+                
+                &-item {
+                    
+                    
+                    object-fit: contain;
+                }
 
                 &-item:hover {
 

@@ -9,8 +9,7 @@
                     <h4 class="shoppingCart__inner__main__headers-title">Total</h4>
                 </div>
                 <div class="shoppingCart__inner__main__cards">
-                    <OrdersItems />
-                    <OrdersItems />
+                    <OrdersItems v-for="(item, i) in getItemsFromShop" :key="i" :item="item"/>
                 </div>
             </div>
             <div class="shoppingCart__inner__total">
@@ -61,12 +60,16 @@ import MainGoodsItem from '@/components/Main/MainGoodsItem.vue';
 import OrdersItems from '@/components/Orders/OrderItem.vue'
 import { useIndex } from "@/stores/index.js";
 import { onMounted, computed, ref } from "vue";
+import { useShopCart } from "@/stores/ShoppingCart.js";
 let getIndexStore = computed(() => indexStore.resArray)
 
 const indexStore = useIndex()
+const shopCartStore = useShopCart()
+const getItemsFromShop = computed(() => shopCartStore.shopsArr)
 
 onMounted(async () => {
     await indexStore.getIndex()
+    console.log(getItemsFromShop.value);
 })
 </script>
 
