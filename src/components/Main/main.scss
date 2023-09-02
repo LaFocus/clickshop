@@ -86,6 +86,7 @@
                 line-height: normal;
                 position: relative;
                 text-transform: capitalize;
+                cursor: pointer;
             }
 
             &-item::after {
@@ -108,6 +109,18 @@
                 right: 0;
                 transform: translateX(0);
 
+            }
+            &-item.active {
+                content: '';
+                width: 0;
+                height: 2px;
+                position: absolute;
+                background: var(--text);
+                bottom: 0;
+                right: 50%;
+                transform: translateX(-50%);
+                opacity: 0;
+                transition: 200ms;
             }
         }
 
@@ -168,46 +181,51 @@
             transition: 150ms;
             position: relative;
             margin-bottom: 30px;
+            border: none;
 
             &-phone {
                 width: 288px;
                 height: 288px;
                 object-fit: contain;
                 margin-bottom: 8px;
+                border: none;
 
             }
 
             &-cart {
                 position: absolute;
                 top: 40px;
-                left: 40px;
-                z-index: 10;
-                display: none;
+                left: 15px;
+                z-index: 100;
+                opacity: 0;
+                transition: 150ms;
 
             }
 
             &-like {
                 position: absolute;
                 top: 105px;
-                left: 40px;
-                z-index: 10;
-                display: none;
+                left: 15px;
+                z-index: 100;
+                opacity: 0;
+                transition: 150ms;
             }
 
 
         }
 
         &-img:hover {
+            // background: rgba(18, 18, 17, 0.05);
+            // backdrop-filter: blur(1px);
+            border: none;
             background: rgba(18, 18, 17, 0.05);
-            backdrop-filter: blur(1px);
-
-            &-cart {
-                display: block;
-            }
         }
 
-        &-img:hover.mainGoodsItem__inner-img-cart {
-            display: block;
+        &-img:hover .mainGoodsItem__inner-img-cart {
+            opacity: 1;
+        }
+        &-img:hover .mainGoodsItem__inner-img-like {
+            opacity: 1;
         }
 
         &-name {
@@ -228,4 +246,8 @@
             line-height: normal;
         }
     }
+}
+
+.swiper-wrapper {
+    
 }

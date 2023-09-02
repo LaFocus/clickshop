@@ -7,9 +7,9 @@
 
             <ul class="header__inner-list">
                 <li><router-link to="/" class="header__inner-list-item">Home</router-link></li>
-                <li><router-link to="/iphone" class="header__inner-list-item">Product card</router-link></li>
+                <li><router-link to="/iphone" class="header__inner-list-item">Selected Products</router-link></li>
                 <li><router-link to="/payment" class="header__inner-list-item">Payment and delivery</router-link></li>
-                <li><router-link to="/contacts" class="header__inner-list-item">Contacts</router-link></li>
+                <li @click="scrollToBottom" class="header__inner-list-item">Contacts</li>
             </ul>
 
             <div class="header__inner__right">
@@ -24,5 +24,9 @@
 </template>
 
 <script setup>
-
+function scrollToBottom()
+{
+    let height = document.body.scrollHeight;
+    window.scroll(0 , height);
+}
 </script>

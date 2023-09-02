@@ -9,7 +9,7 @@
                     <h4 class="shoppingCart__inner__main__headers-title">Total</h4>
                 </div>
                 <div class="shoppingCart__inner__main__cards">
-                    <OrdersItems v-for="(item, i) in getItemsFromShop" :key="i" :item="item"/>
+                    <OrdersItem v-for="(item, i) in getItemsFromShop" :key="i" :item="item"/>
                 </div>
             </div>
             <div class="shoppingCart__inner__total">
@@ -17,22 +17,22 @@
                 <div class="shoppingCart__inner__total__info">
                     <div class="shoppingCart__inner__total__info-item">
                         <span class="shoppingCart__inner__total__info-item-name">Subtotal</span>
-                        <span class="shoppingCart__inner__total__info-item-amount">$138.00</span>
+                        <span class="shoppingCart__inner__total__info-item-amount">${{ getSubTotalPrice() }}</span>
                     </div>
                     <div class="shoppingCart__inner__total__info-item">
-                        <span class="shoppingCart__inner__total__info-item-name">Coupon Discount</span>
-                        <span class="shoppingCart__inner__total__info-item-amount">(-) 00.00</span>
+                        <span class="shoppingCart__inner__total__info-item-name">Total Discount</span>
+                        <span class="shoppingCart__inner__total__info-item-amount">(-) ${{ getDiccountAmount() }}</span>
                     </div>
                     <div class="shoppingCart__inner__total__info-item">
                         <span class="shoppingCart__inner__total__info-item-name">Shiping</span>
-                        <span class="shoppingCart__inner__total__info-item-amount">$16.00</span>
+                        <span class="shoppingCart__inner__total__info-item-amount">${{ shippingPrice }}</span>
                     </div>
                     <a class="shoppingCart__inner__total__info-charge">
                         View shipping charge
                     </a>
                     <div class="shoppingCart__inner__total__info-item">
                         <span class="shoppingCart__inner__total__info-item-name">Total</span>
-                        <span class="shoppingCart__inner__total__info-item-amountTotal">$154.00</span>
+                        <span class="shoppingCart__inner__total__info-item-amountTotal">${{ getTotalPrice() }}</span>
                     </div>
                 </div>
                 <button class="shoppingCart__inner__total-btn">
@@ -57,7 +57,7 @@
 
 <script setup>
 import MainGoodsItem from '@/components/Main/MainGoodsItem.vue';
-import OrdersItems from '@/components/Orders/OrderItem.vue'
+import OrdersItem from '@/components/Orders/OrderItem.vue'
 import { useIndex } from "@/stores/index.js";
 import { onMounted, computed, ref } from "vue";
 import { useShopCart } from "@/stores/ShoppingCart.js";
@@ -66,11 +66,38 @@ let getIndexStore = computed(() => indexStore.resArray)
 const indexStore = useIndex()
 const shopCartStore = useShopCart()
 const getItemsFromShop = computed(() => shopCartStore.shopsArr)
+let shippingPrice = ref(16)
+
+const getSubTotalPrice = () => {
+    let amount = 0
+    shopCartStore.shopsArr.forEach(item => {
+        amount += item.price * item.amount
+    });
+    return amount
+}
+
+const getDiccountAmount = () => {
+    let amount = 0
+    shopCartStore.shopsArr.forEach(item => {
+        amount += item.price * item.amount / item.discountPercentage
+    });
+    return Math.round(amount)
+}
+
+const getTotalPrice = () => {
+    let amount = 0
+    const subtotal = computed(() => getSubTotalPrice())
+    const discount = computed(() => getDiccountAmount())
+    amount += subtotal.value
+    amount += shippingPrice.value
+    amount -= discount.value
+    return amount
+}
 
 onMounted(async () => {
     await indexStore.getIndex()
-    console.log(getItemsFromShop.value);
 })
+
 </script>
 
 <style lang="scss" scoped></style>

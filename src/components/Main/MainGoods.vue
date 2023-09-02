@@ -4,9 +4,7 @@
             <h3 class="mainGoods__inner-title">Categories</h3>
             <ul class="mainGoods__inner-list">
                 <li v-for="(item, i) in categories" :key="i" @click="filterGoods(i)" class="mainGoods__inner-list-item">
-
                     {{ item }}
-
                 </li>
             </ul>
         </div>
@@ -29,7 +27,7 @@
 </template>
 
 <script setup>
-import MainGoodsItem from './MainGoodsItem.vue';
+import MainGoodsItem from '@/components/Main/MainGoodsItem.vue';
 import { useIndex } from "@/stores/index.js";
 import { onMounted, computed, ref } from "vue";
 import { categories } from '@/statick.js'
@@ -46,6 +44,9 @@ const allProds = ref()
 
 const filterGoods = (e) => {
     allProds.value = getIndexStore.value.filter(item => item.category == categories[e])
+}
+const changeActive = () => {
+    
 }
 
 

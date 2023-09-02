@@ -9,26 +9,30 @@
             ${{ item.price }}
         </div>
         <div class="shoppingCart__inner__main__cards-item-btns">
-            <button class="shoppingCart__inner__main__cards-item-btns-btn">-</button>
-            <span>1</span>
-            <button class="shoppingCart__inner__main__cards-item-btns-btn">+</button>
+            <button class="shoppingCart__inner__main__cards-item-btns-btn" @click="shopCartStore.changeAmount(item, '-')">-</button>
+            <span>{{ item.amount }}</span>
+            <button class="shoppingCart__inner__main__cards-item-btns-btn" @click="shopCartStore.changeAmount(item, '+')">+</button>
         </div>
         <div class="shoppingCart__inner__main__cards-item-total">
-            $119.00
+            ${{ item.price * item.amount }}
         </div>
-        <button class="shoppingCart__inner__main__cards-item-trash">
+        <button class="shoppingCart__inner__main__cards-item-trash" @click="shopCartStore.deleteItem(item)">
             <img src="@/assets/images/trash.svg" alt="" srcset="">
         </button>
     </div>
 </template>
 
 <script setup>
+import { useShopCart } from '@/stores/ShoppingCart.js'
+import { computed } from 'vue'
+
 const props = defineProps({
     item: {
         type: Object,
         requaired: true,
     }
 })
-</script>
 
-<style lang="scss" scoped></style>
+const shopCartStore = computed(() => useShopCart())
+
+</script>

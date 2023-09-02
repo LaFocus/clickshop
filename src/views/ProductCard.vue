@@ -37,11 +37,11 @@
 
                 <div class="productCard__inner__info__btns">
                     <div class="productCard__inner__info__btns__amount">
-                        <button class="productCard__inner__info__btns__amount-btn">-</button>
-                        <span>1</span>
-                        <button class="productCard__inner__info__btns__amount-btn">+</button>
+                        <button class="productCard__inner__info__btns__amount-btn" @click="changeAmount('-')">-</button>
+                        <span>{{ amount }}</span>
+                        <button class="productCard__inner__info__btns__amount-btn" @click="changeAmount('+')">+</button>
                     </div>
-                    <button class="productCard__inner__info__btns-order" @click="addItemtoShop.addItem(info)">Buy NOW</button>
+                    <button class="productCard__inner__info__btns-order" @click="addItemtoShop.addItem(info, amount)">Buy NOW</button>
                     <button class="productCard__inner__info__btns-like">
                         <img src="@/assets/images/like.svg" alt="" srcset="">
                     </button>
@@ -53,7 +53,7 @@
             <div class="productCard__recommendations-title">
                 <h3>You may be interested in</h3>
             </div>
-            <div class="productCard__recommendations__goods">
+            <div class="productCard__recommendations__goods" v-if="getIndexStore">
                 <MainGoodsItem v-for="(item, i) in getIndexStore.slice(0, 4)" :key="i" :item="item" />
             </div>
         </div>
@@ -65,21 +65,24 @@ import MainGoodsItem from '@/components/Main/MainGoodsItem.vue';
 import { useIndex } from "@/stores/index.js";
 import { useShopCart } from "@/stores/ShoppingCart.js"
 import { onMounted, computed, ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
-
-
-const indexStore = useIndex()
-const info = ref(null)
-
-let getIndexStore = computed(() => indexStore.resArray)
-const addItemtoShop = useShopCart()
-
+import { useRoute } from "vue-router";
 import { useItemInfo } from "@/stores/itemInfo.js";
 
+const indexStore = useIndex()
+const addItemtoShop = useShopCart()
 const itemInfoStore = useItemInfo()
-const itemInfo = computed(() => itemInfoStore.itemInfo)
 const route = useRoute();
+
+const info = ref(null)
+const amount = ref(1)
 const id = route.params.id
+
+const getIndexStore = computed(() => indexStore.resArray)
+const itemInfo = computed(() => itemInfoStore.itemInfo)
+
+const changeAmount = (operator) => {
+    operator == '-' ? amount.value-- : operator == '+' ? amount.value++ : ''
+}
 
 onMounted(async () => {
     await indexStore.getIndex()
