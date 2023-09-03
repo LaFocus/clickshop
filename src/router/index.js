@@ -13,11 +13,6 @@ const router = createRouter({
       component: load('Home'),
     },
     {
-      path: '/iphone',
-      name: 'Iphone',
-      component: load('ProductCard'),
-    },
-    {
       path: '/payment',
       name: 'Payment',
       component: load('PaymentDevilery'),
@@ -36,6 +31,11 @@ const router = createRouter({
       path: '/productpage/shoppingcart',
       name: 'Shoppingcart',
       component: load('ShoppingCart')
+    },
+    {
+      path: '/like',
+      name: 'Selected',
+      component: load('SelectedCards')
     },
   ],
     

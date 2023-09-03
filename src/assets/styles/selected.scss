@@ -1,7 +1,9 @@
-.selectedItems__item {
+.selectedItems{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 150px;
   
   &__item {
 

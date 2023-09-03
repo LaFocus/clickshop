@@ -1,27 +1,37 @@
 <template>
-    <router-link :to="`/productpage/${props.item.id}`">
-        <div class="mainGoodsItem" v-if="props.item">
-            <div class="mainGoodsItem__inner">
-                <div class="mainGoodsItem__inner-img">
+    <div class="mainGoodsItem" v-if="props.item">
+        <div class="mainGoodsItem__inner">
+            <div class="mainGoodsItem__inner-img">
+                <router-link :to="`/productpage/${props.item.id}`">
                     <img :src="`${props.item.images[0]}`" alt="" class="mainGoodsItem__inner-img-phone">
+                </router-link>
+                <button @click="addItemtoShop.addItem(item, 1)">
                     <img src="@/assets/images/cart.svg" alt="" class="mainGoodsItem__inner-img-cart">
-                    <img src="@/assets/images/like.svg" alt="" class="mainGoodsItem__inner-img-like" @click="selectedStore.addDeleteItem(props.item)">
-                </div>
+                </button>
+                <button @click.stop="selectedStore.addDeleteItem(props.item)">
+                    <img src="@/assets/images/like.svg" alt="" class="mainGoodsItem__inner-img-like">
+                </button>
+            </div>
+            <router-link :to="`/productpage/${props.item.id}`">
+
                 <p class="mainGoodsItem__inner-name">{{ props.item.title }}</p>
                 <p class="mainGoodsItem__inner-price">${{ props.item.price }}</p>
-            </div>
+            </router-link>
+
         </div>
-    </router-link>
+    </div>
 </template>
 
 <script setup>
 import { onMounted, computed } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 import { useItemInfo } from "@/stores/itemInfo.js";
 import { useSelected } from '@/stores/selectedCards.js'
+import { useShopCart } from "@/stores/ShoppingCart.js"
 
 const itemInfoStore = useItemInfo()
 const selectedStore = computed(() => useSelected())
+const addItemtoShop = useShopCart()
 const itemInfo = computed(() => itemInfoStore.itemInfo)
 const route = useRoute();
 const id = route.params.id
