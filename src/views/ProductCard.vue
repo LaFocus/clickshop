@@ -1,26 +1,15 @@
 <template>
     <div class="productCard" v-if="info">
+        <div class="productCard-route container"><span>Home</span>/Product Card</div>
         <div class="productCard__inner container">
             <div class="productCard__inner__images">
                 <div class="productCard__inner__images__thumbnails">
-                    <div class="productCard__inner__images__thumbnails-item">
-                        <img :src="info.images[0]" alt="" width="110px" height="110px">
-                    </div>
-                    <div class="productCard__inner__images__thumbnails-item">
-                        <img :src="info.images[0]" alt="" width="110px" height="110px">
-                    </div>
-                    <div class="productCard__inner__images__thumbnails-item">
-                        <img :src="info.images[0]" alt="" width="110px" height="110px">
-                    </div>
-                    <div class="productCard__inner__images__thumbnails-item">
-                        <img :src="info.images[0]" alt="" width="110px" height="110px">
-                    </div>
-                    <div class="productCard__inner__images__thumbnails-item">
-                        <img :src="info.images[0]" alt="" width="110px" height="110px">
+                    <div class="productCard__inner__images__thumbnails-item" v-for="(item, i) in info.images" :key="i">
+                        <img :src="item" alt="" @click="changeImage(info.images.indexOf(item))">
                     </div>
                 </div>
                 <div class="productCard__inner__images-mainImage">
-                    <img :src="info.images[0]" alt="">
+                    <img :src="info.images[currImage]" alt="">
                 </div>
             </div>
             <div class="productCard__inner__info">
@@ -41,7 +30,8 @@
                         <span>{{ amount }}</span>
                         <button class="productCard__inner__info__btns__amount-btn" @click="changeAmount('+')">+</button>
                     </div>
-                    <button class="productCard__inner__info__btns-order" @click="addItemtoShop.addItem(info, amount)">Buy NOW</button>
+                    <button class="productCard__inner__info__btns-order" @click="addItemtoShop.addItem(info, amount)">Buy
+                        NOW</button>
                     <button class="productCard__inner__info__btns-like">
                         <img src="@/assets/images/like.svg" alt="" srcset="">
                     </button>
@@ -75,6 +65,7 @@ const route = useRoute();
 
 const info = ref(null)
 const amount = ref(1)
+const currImage = ref(0)
 const id = route.params.id
 
 const getIndexStore = computed(() => indexStore.resArray)
@@ -82,6 +73,9 @@ const itemInfo = computed(() => itemInfoStore.itemInfo)
 
 const changeAmount = (operator) => {
     operator == '-' ? amount.value-- : operator == '+' ? amount.value++ : ''
+}
+const changeImage = (e) => {
+    currImage.value = e
 }
 
 onMounted(async () => {

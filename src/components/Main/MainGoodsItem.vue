@@ -8,7 +8,7 @@
                 <button @click="addItemtoShop.addItem(item, 1)">
                     <img src="@/assets/images/cart.svg" alt="" class="mainGoodsItem__inner-img-cart">
                 </button>
-                <button @click.stop="selectedStore.addDeleteItem(props.item)">
+                <button @click="selectedStore.addDeleteItem(props.item)">
                     <img src="@/assets/images/like.svg" alt="" class="mainGoodsItem__inner-img-like">
                 </button>
             </div>

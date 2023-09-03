@@ -9,20 +9,31 @@
             </ul>
         </div>
         <div class="mainGoods__inner">
-            
             <MainGoodsItem v-for="(item, index) in allProds" :key="index" :item="item" />
             <div class="mainGoods__inner__pagination">
-                <div v-if="page >= 2">
-                    <div href="#" class="mainGoods__inner__pagination-item backArrow" @click="page--"><img
-                            src="@/assets/images/nextPage.svg" alt=""></div>
+                <div href="#" class="mainGoods__inner__pagination-item backArrow" v-if="page >= 2" @click="paginateGoods">
+                    <img src="@/assets/images/nextPage.svg" alt="">
                 </div>
-                <div href="#" class="mainGoods__inner__pagination-item" v-for="item in totalPages" @click="page = item">{{
-                    item }}</div>
-                <div href="#" class="mainGoods__inner__pagination-item" @click="page++"><img
-                        src="@/assets/images/nextPage.svg" alt=""></div>
+                <div href="#" class="mainGoods__inner__pagination-item" v-for="item in totalPages"
+                    @click="paginateGoods(item)">
+                    {{ item }}
+                </div>
+                <div href="#" class="mainGoods__inner__pagination-item" @click="paginateGoods">
+                    <img src="@/assets/images/nextPage.svg" alt="">
+                </div>
             </div>
         </div>
-
+    </div>
+    <div class="mainGoods__loading" v-else>
+        <div class="mainGoodsItem__loading">
+            <div class="mainGoodsItem__inner">
+                <div class="mainGoodsItem__inner-img">
+                    <div class="mainGoodsItem__inner-img-phone"></div>
+                </div>
+                <p class="mainGoodsItem__inner-name"></p>
+                <p class="mainGoodsItem__inner-price"></p>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -38,29 +49,28 @@ const categoryValue = ref(null)
 
 
 let getIndexStore = computed(() => indexStore.resArray)
-let totalPages = computed(() => Math.round(getIndexStore.value.length / 12))
-
-const allProds = ref()
+const totalPages = computed(() => Math.round(getIndexStore.value.length / 12))
+const allProds = ref(null)
 
 const filterGoods = (e) => {
     allProds.value = getIndexStore.value.filter(item => item.category == categories[e])
-}
-const changeActive = () => {
-    
+    totalPages.value = Math.round(allProds.value.length / 12)
 }
 
-
-
-computed(() => {
+const paginateGoods = (e) => {
+    e == "-" ? page.value-- : e == "+" ? page.value++ : page.value = e
     const from = page.value * 12 - 12
     const to = from + 12
-    return getIndexStore.value.slice(from, to)
-})
+    allProds.value = getIndexStore.value.slice(from, to)
+}
+
+
 
 
 onMounted(async () => {
     await indexStore.getIndex()
     allProds.value = getIndexStore.value
+    paginateGoods(1)
 })
 
 </script>

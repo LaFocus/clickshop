@@ -9,7 +9,7 @@
                     <h4 class="shoppingCart__inner__main__headers-title">Total</h4>
                 </div>
                 <div class="shoppingCart__inner__main__cards">
-                    <OrdersItem v-for="(item, i) in getItemsFromShop" :key="i" :item="item"/>
+                    <OrdersItem v-for="(item, i) in getItemsFromShop" :key="i" :item="item" />
                 </div>
             </div>
             <div class="shoppingCart__inner__total">
@@ -38,9 +38,11 @@
                 <button class="shoppingCart__inner__total-btn">
                     Proceed To Checkout
                 </button>
-                <h5 class="shoppingCart__inner__total-continue">
-                    Continue Shopping
-                </h5>
+                <router-link to="/">
+                    <h5 class="shoppingCart__inner__total-continue">
+                        Continue Shopping
+                    </h5>
+                </router-link>
             </div>
         </div>
 

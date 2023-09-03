@@ -1,18 +1,178 @@
 .modal {
-    
-    &__header {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(18, 18, 17, 0.2);
+  backdrop-filter: blur(2px);
+
+  &__inner {
+    backdrop-filter: blur(0);
+
+    &-info {
+      padding: 50px 50px 50px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      width: 100%;
+      &-item {
+        color: #3d3d3d;
+        font-family: "Questrial";
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 16px;
+        display: flex;
+        justify-content: space-between;
         width: 100%;
-        height: 200px;
+      }
+      &-item:last-child span:last-child {
+        color: #030a8c;
+        text-align: right;
+        font-family: "Questrial";
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 16px;
+      }
+    }
+  }
+
+  &__header {
+    backdrop-filter: blur(0);
+
+    width: 810px;
+    // width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: #030a8c;
+    padding: 20px;
+
+    &-close {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+    }
+  }
+
+  &__main {
+    backdrop-filter: blur(0);
+    padding: 50px 50px 0 50px;
+    background: white;
+
+    & h3 {
+      color: #030a8c;
+      font-family: "Questrial";
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    &__inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      &-item {
         display: flex;
         align-items: center;
-        justify-content: center;
-        position: absolute;
-        background: #030A8C;
-        
-        &-close {
-            position: absolute;
-            top: 30px;
-            right: 30px;
+        padding: 30px;
+        border: 1px solid #f0f0f0;
+        // width: max-content;
+        margin-bottom: 30px;
+        justify-content: space-between;
+
+        &-img {
+          max-width: 81px;
+          max-height: 68px;
         }
+
+        &-info {
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+          justify-content: center;
+          align-items: flex-start;
+          margin: 0 40px 0 20px;
+
+          & h3 {
+            color: #121211;
+            font-family: "Questrial";
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 150%;
+          }
+
+          & p {
+            color: #a5a5a5;
+            font-family: "Kanit";
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            max-width: 171px;
+          }
+        }
+
+        &-btns {
+          margin: 0 61px 0 40px;
+          color: #a5a5a5;
+          font-family: "Kanit";
+          font-size: 18px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+
+        &-total {
+          color: #030a8c;
+          font-family: "Questrial";
+          font-size: 25px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+
+        &-trash {
+          background: none;
+          border: none;
+          margin-left: 38px;
+        }
+      }
+
+      &-headers {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 50px 0 50px 0;
+
+        & h3 {
+          color: #3d3d3d;
+          font-family: "Questrial";
+          font-size: 20px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 16px; /* 80% */
+        }
+      }
     }
+  }
 }

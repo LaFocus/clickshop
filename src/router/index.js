@@ -37,6 +37,7 @@ const router = createRouter({
       name: 'Selected',
       component: load('SelectedCards')
     },
+    
   ],
     
   mode: 'history'

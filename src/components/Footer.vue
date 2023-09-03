@@ -4,10 +4,17 @@
             <img src="@/assets/images/logofooter.svg" alt="" srcset="">
             <div class="footer__inner__nav">
                 <ul class="footer__inner__nav__list">
-                    <li class="footer__inner__nav__list-item">Home</li>
+                    <!-- <li class="footer__inner__nav__list-item">Home</li>
                     <li class="footer__inner__nav__list-item">Payment and delivery</li>
-                    <li class="footer__inner__nav__list-item">Product card</li>
-                    <li class="footer__inner__nav__list-item">Like</li>
+                    <li class="footer__inner__nav__list-item">Product card</li>-->
+                    <div>
+                        <li><router-link to="/" class="footer__inner__nav__list-item">Home</router-link></li>
+                        <li><router-link to="/like" class="footer__inner__nav__list-item">Selected Products</router-link></li>
+                    </div>
+                    <div>
+                        <li><router-link to="/payment" class="footer__inner__nav__list-item">Payment and delivery</router-link></li>
+                        <li><router-link  class="footer__inner__nav__list-item" to="/payment">Like</router-link></li>
+                    </div>
                 </ul>
             </div>
             <div class="footer__inner__contacts">
