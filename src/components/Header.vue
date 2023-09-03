@@ -16,7 +16,7 @@
                         Products</router-link></li>
                 <li><router-link to="/payment" class="header__inner-list-item">Payment and
                         delivery</router-link></li>
-                <li  @click="scrollToBottom" class="header__inner-list-item">Contacts</li>
+                <li @click="scrollToBottom" class="header__inner-list-item">Contacts</li>
             </ul>
 
 
@@ -39,6 +39,10 @@ import { ref } from 'vue'
 function scrollToBottom() {
     let height = document.body.scrollHeight;
     window.scroll(0, height);
+    // window.scrollTo({
+    //     bottom: 0,
+    //     behavior: 'smooth'
+    // });
     burger.value = false
 }
 

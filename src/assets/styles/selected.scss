@@ -1,17 +1,22 @@
-.selectedItems{
+.selectedItems {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   margin-bottom: 150px;
   min-height: 30vh;
-  
-  &__item {
+  @media screen and (max-width: 809px) {
+    justify-content: center;
+  }
 
+  &__item {
     &__inner {
       display: flex;
       flex-direction: column;
       align-content: flex-start;
+      @media screen and (max-width: 809px) {
+        align-items: center;
+      }
 
       &-img {
         width: 390px;
@@ -73,6 +78,10 @@
         line-height: 150%;
         max-width: 250px;
         width: 100%;
+        @media screen and (max-width: 809px) {
+          align-items: center;
+          text-align: center;
+        }
       }
 
       &-price {

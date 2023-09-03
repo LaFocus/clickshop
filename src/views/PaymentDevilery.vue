@@ -94,7 +94,7 @@
               <span class="payment__inner__info__order__money-item-amountTotal">${{ getTotalPrice() }}</span>
             </div>
           </div>
-          <button class="payment__inner__info__order__money-btn" @click="flag = true">
+          <button class="payment__inner__info__order__money-btn" @click="modalOn">
             Place Order
           </button>
         </div>
@@ -103,61 +103,68 @@
   </div>
 
   <div class="modal" v-show="flag">
-        <div class="modal__inner">
-            <div class="modal__header">
-                <img src="@/assets/images/thanks.svg" alt="" srcset="">
-                <img src="@/assets/images/close.svg" alt="" class="modal__header-close" @click="flag = false">
-            </div>
-            <div class="modal__main">
-                <h3>Order Details</h3>
-                <div class="modal__main__inner">
-                    <div class="modal__main__inner-headers">
-                        <h3>Products</h3>
-                        <h3>Qty</h3>
-                        <h3>Subtotal</h3>
-                    </div>
-                    <div class="modal__main__inner-items">
-                        <div class="modal__main__inner-item" v-for="(item, i) in getItemsFromShop" :key="i">
-                            <img :src="item.images[0]" alt="" class="modal__main__inner-item-img">
-                            <div class="modal__main__inner-item-info">
-                                <h3>{{ item.title }}</h3>
-                                <p>{{ item.description }}</p>
-                            </div>
-                            <div class="modal__main__inner-item-btns">
-                                (x{{ item.amount }})
-                            </div>
-                            <div class="modal__main__inner-item-total">
-                                ${{ item.price * item.amount }}
-                            </div>
-                            <button class="shoppingCart__inner__main__cards-item-trash"
-                                @click="shopCartStore.deleteItem(item)">
-                                <img src="@/assets/images/trash.svg" alt="" srcset="">
-                            </button>
-                        </div>
-                    </div>
-                    <div class="modal__inner-info">
-                        <div class="modal__inner-info-item">
-                            <span>Shiping</span>
-                            <span>${{ shippingPrice }}</span>
-                        </div>
-                        <div class="modal__inner-info-item">
-                            <span>Total</span>
-                            <span>${{ getTotalPrice() }}</span>
-                        </div>
-                    </div>
+    <div class="modal__inner">
+      <div class="modal__header">
+        <img src="@/assets/images/thanks.svg" alt="" srcset="">
+        <img src="@/assets/images/close.svg" alt="" class="modal__header-close" @click="flag = false">
+      </div>
+      <div class="modal__main">
+        <h3>Order Details</h3>
+        <div class="modal__main__inner">
+          <div class="modal__main__inner-headers">
+            <h3>Products</h3>
+            <h3>Qty</h3>
+            <h3>Subtotal</h3>
+          </div>
+          <div class="modal__main__inner-items">
+            <Swiper direction="vertical" slides-per-view="3">
+              <Swiper-slide v-for="(item, i) in getItemsFromShop" :key="i">
+                <div class="modal__main__inner-item" >
+                  <img :src="item.images[0]" alt="" class="modal__main__inner-item-img">
+                  <div class="modal__main__inner-item-info">
+                    <h3>{{ item.title }}</h3>
+                    <p>{{ item.description }}</p>
+                  </div>
+                  <div class="modal__main__inner-item-btns">
+                    (x{{ item.amount }})
+                  </div>
+                  <div class="modal__main__inner-item-total">
+                    ${{ item.price * item.amount }}
+                  </div>
+                  <button class="shoppingCart__inner__main__cards-item-trash" @click="shopCartStore.deleteItem(item)">
+                    <img src="@/assets/images/trash.svg" alt="" srcset="">
+                  </button>
                 </div>
+              </Swiper-slide>
+            </Swiper>
+          </div>
+          <div class="modal__inner-info">
+            <div class="modal__inner-info-item">
+              <span>Shiping</span>
+              <span>${{ shippingPrice }}</span>
             </div>
+            <div class="modal__inner-info-item">
+              <span>Total</span>
+              <span>${{ getTotalPrice() }}</span>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script setup>
 import { computed, ref } from "vue";
 import { useShopCart } from "@/stores/ShoppingCart.js";
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import "swiper/scss";
+
 
 const shopCartStore = useShopCart()
 const getItemsFromShop = computed(() => shopCartStore.shopsArr)
 let shippingPrice = ref(16)
+const body = document.querySelector('body')
 
 const getSubTotalPrice = () => {
   let amount = 0
@@ -168,6 +175,15 @@ const getSubTotalPrice = () => {
 }
 
 const flag = ref(false)
+const modalOn = () => {
+  flag.value = true
+  // body.style.height = '100vh'
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+  console.log(body);
+}
 
 const getDiccountAmount = () => {
   let amount = 0
