@@ -20,6 +20,7 @@
         right: 30px;
         top: 30px;
         display: none;
+
         @media screen and (max-width: 768px) {
           display: flex;
         }
@@ -48,6 +49,7 @@
           transform: translateX(0);
         }
       }
+
       &-item {
         color: var(--text);
         position: relative;
@@ -58,9 +60,11 @@
         font-style: normal;
         font-weight: 400;
         line-height: normal;
+
         @media screen and (max-width: 1000px) {
           font-size: 16px;
         }
+
         @media screen and (max-width: 768px) {
           color: white;
           font-size: 25px;
@@ -73,7 +77,7 @@
         height: 2px;
         position: absolute;
         background: var(--text);
-        bottom: 0;
+        bottom: -13px;
         right: 50%;
         transform: translateX(-50%);
         opacity: 0;
@@ -107,16 +111,36 @@
       gap: 50px;
       align-items: center;
       justify-content: center;
+      position: relative;
+
       @media screen and (max-width: 1000px) {
         gap: 25px;
       }
 
-      // @media screen and (max-width: 1000px) {
-      //     flex-direction: column;
-      // }
-
-      &-cart {
-        cursor: pointer;
+      &-shop {
+        &-counter {
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          top: -5px;
+          right: 40px;
+          border-radius: 50%;
+          background: #030a8c;
+          color: white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 3px 7px;
+          font-family: "Kanit";
+          font-size: 10px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+          border: 3px solid white;
+        }
+        & img {
+          cursor: pointer;
+        }
       }
 
       &-btn {
@@ -146,4 +170,15 @@
       display: block;
     }
   }
+}
+
+.routes {
+  color: #121211;
+  font-family: 'Questrial';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 76px;
+  margin-top: 36px;
 }

@@ -1,41 +1,62 @@
 <template>
-  <div class="payment" v-if="getItemsFromShop.length">
-    <div class="payment__inner container">
+  <div class="payment" ref="payment">
+    <div class="routes container">
+      <router-link to="/">
+        <span>Home/</span>
+      </router-link>
+      Payment And Delivery
+    </div>
+    <div class="payment__inner container" v-if="getItemsFromShop.length">
       <div class="payment__inner__forms">
         <h3>Billing Address</h3>
         <form action="">
           <div class="payment__inner__forms-item">
             <span>First Name *</span>
-            <input type="text">
+            <input type="text" v-bind="name">
+            <pre>{{ errors.name }}</pre>
           </div>
           <div class="payment__inner__forms-item">
             <span>Last Name *</span>
-            <input type="text">
+            <input type="text" v-bind="lastname">
+            <pre>{{ errors.lastname }}</pre>
+
           </div>
           <div class="payment__inner__forms-item">
             <span>Country / Region *</span>
-            <input type="text">
+            <input type="text" v-bind="country">
+            <pre>{{ errors.country }}</pre>
           </div>
           <div class="payment__inner__forms-item">
             <span>Town / City *</span>
-            <input type="text">
+            <input type="text" v-bind="town">
+            <pre>{{ errors.town }}</pre>
           </div>
           <div class="payment__inner__forms-item payment__inner__forms-itemStreet">
             <span>Street Address *</span>
             <div>
-              <input type="text">
+              <input type="text" v-bind="adress">
               <input type="text">
             </div>
+            <pre>{{ errors.adress }}</pre>
           </div>
           <!-- <div class="payment__inner__forms-item">
             </div> -->
           <div class="payment__inner__forms-item">
             <span>Email address *</span>
-            <input type="text">
+            <input type="text" v-bind="email">
+            <pre>{{ errors.email }}</pre>
           </div>
           <div class="payment__inner__forms-item">
             <span>Phone Number *</span>
-            <input type="text">
+            <div>
+              <select name="" id="">
+                <option value="+998">+998</option>
+                <option value="+1">+1</option>
+                <option value="+3">+3</option>
+              </select>
+              <input type="text" v-bind="phone">
+            </div>
+            <pre>{{ errors.phone ? 'Телефон должен содержать только цифры' : '' }}</pre>
           </div>
         </form>
         <div class="payment__inner__forms-diff">
@@ -100,13 +121,17 @@
         </div>
       </div>
     </div>
+    <div class="empty" v-else>
+      Ничего нет!
+    </div>
   </div>
 
   <div class="modal" v-show="flag">
+    <div class="modal__bg"></div>
     <div class="modal__inner">
       <div class="modal__header">
         <img src="@/assets/images/thanks.svg" alt="" srcset="">
-        <img src="@/assets/images/close.svg" alt="" class="modal__header-close" @click="flag = false">
+        <img src="@/assets/images/close.svg" alt="" class="modal__header-close" @click="modalOff">
       </div>
       <div class="modal__main">
         <h3>Order Details</h3>
@@ -117,26 +142,22 @@
             <h3>Subtotal</h3>
           </div>
           <div class="modal__main__inner-items">
-            <Swiper direction="vertical" slides-per-view="3">
-              <Swiper-slide v-for="(item, i) in getItemsFromShop" :key="i">
-                <div class="modal__main__inner-item" >
-                  <img :src="item.images[0]" alt="" class="modal__main__inner-item-img">
-                  <div class="modal__main__inner-item-info">
-                    <h3>{{ item.title }}</h3>
-                    <p>{{ item.description }}</p>
-                  </div>
-                  <div class="modal__main__inner-item-btns">
-                    (x{{ item.amount }})
-                  </div>
-                  <div class="modal__main__inner-item-total">
-                    ${{ item.price * item.amount }}
-                  </div>
-                  <button class="shoppingCart__inner__main__cards-item-trash" @click="shopCartStore.deleteItem(item)">
-                    <img src="@/assets/images/trash.svg" alt="" srcset="">
-                  </button>
-                </div>
-              </Swiper-slide>
-            </Swiper>
+            <div class="modal__main__inner-item" v-for="(item, i) in getItemsFromShop" :key="i">
+              <img :src="item.images[0]" alt="" class="modal__main__inner-item-img">
+              <div class="modal__main__inner-item-info">
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.description }}</p>
+              </div>
+              <div class="modal__main__inner-item-btns">
+                (x{{ item.amount }})
+              </div>
+              <div class="modal__main__inner-item-total">
+                ${{ item.price * item.amount }}
+              </div>
+              <button class="shoppingCart__inner__main__cards-item-trash" @click="shopCartStore.deleteItem(item)">
+                <img src="@/assets/images/trash.svg" alt="" srcset="">
+              </button>
+            </div>
           </div>
           <div class="modal__inner-info">
             <div class="modal__inner-info-item">
@@ -158,14 +179,48 @@
 import { computed, ref } from "vue";
 import { useShopCart } from "@/stores/ShoppingCart.js";
 import { Swiper, SwiperSlide } from 'swiper/vue';
+import { useForm } from 'vee-validate';
+import * as yup from 'yup';
 import "swiper/scss";
 
+const { values, errors, defineInputBinds } = useForm({
+  validationSchema: yup.object({
+    email: yup.string().email().required(),
+    name: yup.string().required(),
+    lastname: yup.string().required(),
+    country: yup.string().required(),
+    town: yup.string().required(),
+    adress: yup.string().required(),
+    phone: yup.number().required(),
+  }),
+});
 
+const email = defineInputBinds('email', {
+  validateOnInput: true,
+});
+const name = defineInputBinds('name', {
+  validateOnInput: true,
+})
+const lastname = defineInputBinds('lastname', {
+  validateOnInput: true,
+})
+const country = defineInputBinds('country', {
+  validateOnInput: true,
+})
+const town = defineInputBinds('town', {
+  validateOnInput: true,
+})
+const adress = defineInputBinds('adress', {
+  validateOnInput: true,
+})
+const phone = defineInputBinds('phone', {
+  validateOnInput: true,
+})
 const shopCartStore = useShopCart()
 const getItemsFromShop = computed(() => shopCartStore.shopsArr)
 let shippingPrice = ref(16)
 const body = document.querySelector('body')
-
+const payment = ref(null)
 const getSubTotalPrice = () => {
   let amount = 0
   shopCartStore.shopsArr.forEach(item => {
@@ -177,12 +232,22 @@ const getSubTotalPrice = () => {
 const flag = ref(false)
 const modalOn = () => {
   flag.value = true
-  // body.style.height = '100vh'
   window.scrollTo({
     top: 0,
     behavior: 'smooth'
   });
-  console.log(body);
+  // if (flag.value === true) {
+  //   window.addEventListener('scroll', e => {
+  //     window.scrollTo({ top: 0 })
+  //   })
+  // }
+}
+
+const modalOff = () => {
+  flag.value = false
+  // window.addEventListener('scroll', e => {
+  //   window.scroll()
+  // })
 }
 
 const getDiccountAmount = () => {

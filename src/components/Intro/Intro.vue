@@ -1,5 +1,5 @@
 <template>
-    <div class="intro" v-if="getIndexStore">
+    <header class="intro" v-if="getIndexStore">
         <div class="container intro__inner">
             <div class="intro__inner__info">
                 <h2 class="intro__inner__info-logo">
@@ -15,7 +15,7 @@
                 </Swiper-slide>
             </Swiper>
         </div>
-    </div>
+    </header>
 </template>
 
 <script setup>

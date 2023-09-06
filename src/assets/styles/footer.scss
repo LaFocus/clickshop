@@ -20,9 +20,10 @@
     &__nav {
       &__list {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         flex-wrap: wrap;
         column-gap: 50px;
+        row-gap: 50px;
         @media screen and (max-width: 980px) {
             flex-direction: column;
             gap: 20px;

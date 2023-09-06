@@ -1,5 +1,5 @@
 <template>
-    <header class="header">
+    <nav class="header">
         <div class="header__inner container">
             <router-link class="header__inner-logo" to="/">
                 <img src="@/assets/images/logo.svg" alt="">
@@ -21,7 +21,8 @@
 
 
             <div class="header__inner__right">
-                <router-link to="/productpage/shoppingcart">
+                <router-link to="/productpage/shoppingcart" enter-class="header__inner__right-shop">
+                    <div class="header__inner__right-shop-counter" v-show="show">{{ counter }}</div>
                     <img src="@/assets/images/cart.svg" alt="" class="header__inner__right-cart">
                 </router-link>
                 <div class="burger">
@@ -30,21 +31,21 @@
                 <!-- <button class="header__inner__right-btn"> Login </button> -->
             </div>
         </div>
-    </header>
+    </nav>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { useShopCart } from '@/stores/ShoppingCart.js'
 
 function scrollToBottom() {
     let height = document.body.scrollHeight;
     window.scroll(0, height);
-    // window.scrollTo({
-    //     bottom: 0,
-    //     behavior: 'smooth'
-    // });
     burger.value = false
 }
+const shopCartStore = useShopCart()
+const counter = computed(() => shopCartStore.shopsArr.length)
+const show = computed(() => counter.value == 0 ? false : true)
 
 const burger = ref(false)
 

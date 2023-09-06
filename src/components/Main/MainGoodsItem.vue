@@ -5,10 +5,10 @@
                 <router-link :to="`/productpage/${props.item.id}`">
                     <img :src="`${props.item.images[0]}`" alt="" class="mainGoodsItem__inner-img-phone">
                 </router-link>
-                <button @click="addItemtoShop.addItem(item, 1)">
+                <button @click="addItemToShopANDLOCAL">
                     <img src="@/assets/images/cart.svg" alt="" class="mainGoodsItem__inner-img-cart">
                 </button>
-                <button @click="selectedStore.addDeleteItem(props.item)">
+                <button @click="itemToLocal(props.item)">
                     <img src="@/assets/images/like.svg" alt="" class="mainGoodsItem__inner-img-like">
                 </button>
             </div>
@@ -23,18 +23,20 @@
 </template>
 
 <script setup>
-import { onMounted, computed } from "vue";
+import { onMounted, computed, ref } from "vue";
 import { useRoute } from "vue-router";
 import { useItemInfo } from "@/stores/itemInfo.js";
-import { useSelected } from '@/stores/selectedCards.js'
 import { useShopCart } from "@/stores/ShoppingCart.js"
 
 const itemInfoStore = useItemInfo()
-const selectedStore = computed(() => useSelected())
 const addItemtoShop = useShopCart()
-const itemInfo = computed(() => itemInfoStore.itemInfo)
+const addItemToShopANDLOCAL = () => {
+    addItemtoShop.addItem(props.item, 1)
+    localStorage.shopsArr = JSON.stringify(addItemtoShop.shopsArr)
+}
 const route = useRoute();
 const id = route.params.id
+const localItems = ref([])
 const props = defineProps({
     item: {
         type: Object,
@@ -42,11 +44,23 @@ const props = defineProps({
     }
 })
 
+const itemToLocal = (e) => {
+  const existingIndex = localItems.value.findIndex(item => JSON.stringify(item) === JSON.stringify(e));
+  if (existingIndex !== -1) {
+    localItems.value.splice(existingIndex, 1);
+  } else {
+    localItems.value.push(e);
+  }
+
+  let storedItems = JSON.parse(localStorage.getItem('itemsGoods')) || [];
+  let updatedItems = [...storedItems, ...localItems.value];
+  console.log(updatedItems);
+  localStorage.setItem('itemsGoods', JSON.stringify(updatedItems));
+};
+
 onMounted(async () => {
     if (route.params.id) {
         await itemInfoStore.getItemInfo(id)
-        // console.log(id);
-        // console.log(itemInfo.value);
     }
 })
 

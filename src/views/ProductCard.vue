@@ -1,6 +1,11 @@
 <template>
     <div class="productCard" v-if="info">
-        <div class="productCard-route container"><span>Home</span>/Product Card</div>
+        <div class="routes container">
+            <router-link to="/">
+                <span>Home/</span>
+            </router-link>
+            Product Card
+        </div>
         <div class="productCard__inner container">
             <div class="productCard__inner__images">
                 <div class="productCard__inner__images__thumbnails">

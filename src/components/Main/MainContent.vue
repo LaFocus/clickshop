@@ -2,7 +2,7 @@
     <main class="main">
         <div class="main__inner container">
             <MainGoods />
-            <div class="main__inner__more">
+            <section class="main__inner__more">
                 <div class="main__inner__more__item">
                     <h4>Christian Dior Sauvage Parfum</h4>
                     <p>In winter 2018, the world was presented a stunning new product from the famous perfume brand
@@ -16,7 +16,7 @@
                         has satellite communication for emergencies.</p>
                     <img src="@/assets/images/extra2.png" alt="">
                 </div>
-            </div>
+            </section>
         </div>
     </main>
 </template>

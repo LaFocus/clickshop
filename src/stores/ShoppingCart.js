@@ -1,30 +1,37 @@
 import { defineStore } from 'pinia'
 
-
 export const useShopCart = defineStore('shopCart', {
+
     state: () => ({
-        shopsArr: []
+        shopsArr: JSON.parse(localStorage.getItem('cartItems')) || []
     }),
+
     actions: {
         addItem(item, amount) {
-            if (!this.shopsArr.includes(item)) {
-                this.shopsArr.push(item)
-                item.amount = amount
+            if (!this.shopsArr.find(cartItem => cartItem.id === item.id)) {
+                this.shopsArr.push({ ...item, amount });
             }
+            this.saveCartItems();
         },
         deleteItem(item) {
-            if (this.shopsArr.includes(item)) {
-                this.shopsArr.splice(this.shopsArr.indexOf(item), 1)
+            const index = this.shopsArr.findIndex(cartItem => cartItem.id === item.id);
+            if (index !== -1) {
+                this.shopsArr.splice(index, 1);
+                this.saveCartItems();
             }
         },
         changeAmount(item, operator) {
-            
-            operator == '-' ? item.amount-- : operator == '+' ? item.amount++ : ''
-            if (item.amount == 0) {
-                this.shopsArr.splice(this.shopsArr.indexOf(item), 1)
-
+            operator === '-' ? item.amount-- : operator === '+' ? item.amount++ : '';
+            if (item.amount === 0) {
+                const index = this.shopsArr.findIndex(cartItem => cartItem.id === item.id);
+                if (index !== -1) {
+                    this.shopsArr.splice(index, 1);
+                    this.saveCartItems();
+                }
             }
+        },
+        saveCartItems() {
+            localStorage.setItem('cartItems', JSON.stringify(this.shopsArr));
         }
-
     }
-})
+});

@@ -1,5 +1,11 @@
 <template>
     <div class="shoppingCart">
+        <div class="routes container">
+            <router-link to="/">
+                <span>Home/</span>
+            </router-link>
+            Shopping Card
+        </div>
         <div class="shoppingCart__inner container">
             <div class="shoppingCart__inner__main">
                 <div class="shoppingCart__inner__main__headers">
@@ -35,9 +41,11 @@
                         <span class="shoppingCart__inner__total__info-item-amountTotal">${{ getTotalPrice() }}</span>
                     </div>
                 </div>
-                <button class="shoppingCart__inner__total-btn">
-                    Proceed To Checkout
-                </button>
+                <router-link to="/payment">
+                    <button class="shoppingCart__inner__total-btn">
+                        Proceed To Checkout
+                    </button>
+                </router-link>
                 <router-link to="/">
                     <h5 class="shoppingCart__inner__total-continue">
                         Continue Shopping
@@ -66,13 +74,13 @@ import { useShopCart } from "@/stores/ShoppingCart.js";
 let getIndexStore = computed(() => indexStore.resArray)
 
 const indexStore = useIndex()
-const shopCartStore = useShopCart()
-const getItemsFromShop = computed(() => shopCartStore.shopsArr)
+const shopCartStore = computed(() => useShopCart());
+const getItemsFromShop = computed(() => shopCartStore.value.shopsArr);
 let shippingPrice = ref(16)
 
 const getSubTotalPrice = () => {
     let amount = 0
-    shopCartStore.shopsArr.forEach(item => {
+    getItemsFromShop.value.forEach(item => {
         amount += item.price * item.amount
     });
     return amount
@@ -80,7 +88,7 @@ const getSubTotalPrice = () => {
 
 const getDiccountAmount = () => {
     let amount = 0
-    shopCartStore.shopsArr.forEach(item => {
+    getItemsFromShop.value.forEach(item => {
         amount += item.price * item.amount / item.discountPercentage
     });
     return Math.round(amount)
