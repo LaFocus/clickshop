@@ -5,7 +5,7 @@
     justify-content: space-between;
     margin-top: 84px;
 
-    @media screen and (max-width: 570px){
+    @media screen and (max-width: 570px) {
       flex-direction: column;
     }
 
@@ -16,27 +16,28 @@
       align-items: flex-start;
       position: relative;
 
-      @media screen and (max-width: 570px){
+      @media screen and (max-width: 570px) {
         align-items: center;
         margin-bottom: 50px;
       }
 
       &-logo {
+        font-family: 'Kanit-bold';
         font-size: 100px;
         font-style: normal;
         font-weight: 800;
         line-height: normal;
         text-transform: uppercase;
-        max-width: 670px;
-        width: 100%;
 
-        @media screen and (max-width: 1510px){
+        @media screen and (max-width: 1510px) {
           font-size: 70px;
         }
-        @media screen and (max-width: 1000px){
+
+        @media screen and (max-width: 1000px) {
           font-size: 50px;
         }
-        @media screen and (max-width: 570px){
+
+        @media screen and (max-width: 570px) {
           text-align: center;
           font-size: 30px;
         }
@@ -53,6 +54,7 @@
         text-transform: uppercase;
         border: none;
         transition: 200ms;
+        font-family: 'Bruno';
       }
 
       &-btn:hover {
@@ -93,17 +95,19 @@
       object-fit: fill !important;
       display: flex !important;
       // align-items: center !important;
-      justify-content: center !important; 
+      justify-content: center !important;
 
       &-item {
         display: flex !important;
         justify-content: center !important;
         align-items: center !important;
+
         & img {
           width: 80% !important;
           height: 100% !important;
           object-fit: cover !important;
-          @media screen and (max-width: 1510px){
+
+          @media screen and (max-width: 1510px) {
             width: 80% !important;
             height: 80% !important;
           }
@@ -114,7 +118,7 @@
 }
 
 .swiper-pagination {
-  @media screen and (max-width: 570px){
+  @media screen and (max-width: 570px) {
     text-align: center;
     display: flex;
     justify-content: center;
@@ -122,8 +126,7 @@
 }
 
 .swiper-slide {
-  @media screen and (max-width: 600px){
+  @media screen and (max-width: 600px) {
     // margin-right: 0 !important;
   }
 }
-

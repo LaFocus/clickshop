@@ -89,9 +89,9 @@
               <div class="payment__inner__info__order-cards-item-total">
                 ${{ item.price * item.amount }}
               </div>
-              <button class="shoppingCart__inner__main__cards-item-trash" @click="shopCartStore.deleteItem(item)">
+              <!-- <button class="shoppingCart__inner__main__cards-item-trash" @click="shopCartStore.deleteItem(item)">
                 <img src="@/assets/images/trash.svg" alt="" srcset="">
-              </button>
+              </button> -->
             </div>
           </div>
           <div class="payment__inner__info__order__money">
@@ -154,9 +154,9 @@
               <div class="modal__main__inner-item-total">
                 ${{ item.price * item.amount }}
               </div>
-              <button class="shoppingCart__inner__main__cards-item-trash" @click="shopCartStore.deleteItem(item)">
+              <!-- <button class="shoppingCart__inner__main__cards-item-trash" @click="shopCartStore.deleteItem(item)">
                 <img src="@/assets/images/trash.svg" alt="" srcset="">
-              </button>
+              </button> -->
             </div>
           </div>
           <div class="modal__inner-info">
