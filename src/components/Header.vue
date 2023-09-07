@@ -4,9 +4,6 @@
             <router-link class="header__inner-logo" to="/">
                 <img src="@/assets/images/logo.svg" alt="">
             </router-link>
-
-
-
             <ul class="header__inner-list" :class="{ active: burger }">
                 <li class="header__inner-list-close" @click="burgerOff">
                     <img src="@/assets/images/close.svg" alt="">
@@ -18,8 +15,6 @@
                         delivery</router-link></li>
                 <li @click="scrollToBottom" class="header__inner-list-item">Contacts</li>
             </ul>
-
-
             <div class="header__inner__right">
                 <router-link to="/productpage/shoppingcart" enter-class="header__inner__right-shop">
                     <div class="header__inner__right-shop-counter" v-show="show">{{ counter }}</div>

@@ -11,12 +11,12 @@
         </div>
         <div class="mainGoods__inner">
             <MainGoodsItem v-for="(item, index) in allProds" :key="index" :item="item" />
-            <div class="mainGoods__inner__pagination">
+            <div class="mainGoods__inner__pagination" ref="paginateRefs">
                 <div href="#" class="mainGoods__inner__pagination-item backArrow" v-if="page >= 2" @click="minusPage">
                     <img src="@/assets/images/nextPage.svg" alt="">
                 </div>
-                <div href="#" class="mainGoods__inner__pagination-item" v-for="item in totalPages" :class="{ active: item === page }"
-                    @click="paginateGoods(item)">
+                <div href="#" class="mainGoods__inner__pagination-item" v-for="item in totalPages"
+                    :class="{ active: item === page }" @click="paginateGoods(item)">
                     {{ item }}
                 </div>
                 <div href="#" class="mainGoods__inner__pagination-item" @click="plusPage">
@@ -25,17 +25,6 @@
             </div>
         </div>
     </section>
-    <div class="mainGoods__loading" v-else>
-        <div class="mainGoodsItem__loading">
-            <div class="mainGoodsItem__inner">
-                <div class="mainGoodsItem__inner-img">
-                    <div class="mainGoodsItem__inner-img-phone"></div>
-                </div>
-                <p class="mainGoodsItem__inner-name"></p>
-                <p class="mainGoodsItem__inner-price"></p>
-            </div>
-        </div>
-    </div>
 </template>
 
 <script setup>
@@ -50,25 +39,30 @@ const hasActiveBool = ref(false)
 const activeFilter = ref(null);
 const list = ref(null)
 const allProds = ref(null)
+const paginateRefs = ref(null)
 
 let getIndexStore = computed(() => indexStore.resArray)
 const totalPages = computed(() => Math.round(getIndexStore.value.length / 12))
 
 const filterGoods = (e, ev) => {
-  if (activeFilter.value === e) {
-    ev.target.classList.remove('active');
-    activeFilter.value = null;
-    allProds.value = getIndexStore.value;
-  } else {
-    if (activeFilter.value !== null) {
-      const prevActiveFilterEl = list.value.children[activeFilter.value];
-      prevActiveFilterEl.classList.remove('active');
+    if (activeFilter.value === e) {
+        ev.target.classList.remove('active');
+        activeFilter.value = null;
+        allProds.value = getIndexStore.value;
+        paginateGoods(1);
+        paginateRefs.value.style.display = 'flex';
+    } else {
+        if (activeFilter.value !== null) {
+            const prevActiveFilterEl = list.value.children[activeFilter.value];
+            prevActiveFilterEl.classList.remove('active');
+        }
+        ev.target.classList.add('active');
+        activeFilter.value = e;
+        allProds.value = getIndexStore.value.filter(item => item.category == categories[e]);
+        paginateRefs.value.style.display = 'none';
     }
-    ev.target.classList.add('active');
-    activeFilter.value = e;
-    allProds.value = getIndexStore.value.filter(item => item.category == categories[e]);
-  }
 };
+
 const minusPage = () => {
     page.value--
     const from = page.value * 12 - 12
