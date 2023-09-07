@@ -1,10 +1,11 @@
 .selectedItems {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
   margin-bottom: 150px;
   min-height: 30vh;
+  gap: 30px;
   @media screen and (max-width: 809px) {
     justify-content: center;
   }

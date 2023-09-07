@@ -82,13 +82,12 @@ const plusPage = () => {
     allProds.value = getIndexStore.value.slice(from, to)
 }
 const pageActive = ref(1)
-const paginateGoods = (e, event) => {
+const paginateGoods = (e) => {
     pageActive.value = e
     e == "-" ? page.value-- : e == "+" ? page.value++ : page.value = e
     const from = page.value * 12 - 12
     const to = from + 12
     allProds.value = getIndexStore.value.slice(from, to)
-    event.target.setAttribute
 }
 
 
