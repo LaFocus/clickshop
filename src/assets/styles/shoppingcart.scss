@@ -87,18 +87,24 @@
           border: 1px solid #f0f0f0;
           margin-bottom: 30px;
           @media screen and (max-width: 1025px) {
-            width: max-content;
+            width: 790px;
+            justify-content: space-between;
           }
           @media screen and (max-width: 820px) {
             flex-direction: column;
             height: 500px;
+            width: max-content;
+
             justify-content: space-between;
             align-items: center;
+            align-content: space-between;
           }
 
           &-img {
             max-width: 160px;
+            width: 100%;
             max-height: 136px;
+            height: 100%;
             @media screen and (max-width: 820px) {
               height: 200px;
               object-fit: contain;
