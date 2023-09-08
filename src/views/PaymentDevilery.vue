@@ -23,7 +23,7 @@
           </div>
           <div class="payment__inner__forms-item">
             <span>Country / Region *</span>
-            <input type="text" v-bind="country">
+            <input type="text" v-bind="country" placeholder="Select a country / region">
             <pre>{{ errors.country }}</pre>
           </div>
           <div class="payment__inner__forms-item">
@@ -34,8 +34,8 @@
           <div class="payment__inner__forms-item payment__inner__forms-itemStreet">
             <span>Street Address *</span>
             <div>
-              <input type="text" v-bind="adress">
-              <input type="text">
+              <input type="text" v-bind="adress" placeholder="House number and street name">
+              <input type="text" placeholder="Appartment, suite, unit, etc. (optional)">
             </div>
             <pre>{{ errors.adress }}</pre>
           </div>

@@ -22,12 +22,16 @@
       }
 
       &-logo {
-        font-family: 'Kanit-bold';
+        font-family: "Kanit-bold";
         font-size: 100px;
         font-style: normal;
         font-weight: 800;
         line-height: normal;
         text-transform: uppercase;
+        background: linear-gradient(90deg, #121211 23.37%, #3d3d3d 55.51%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
 
         @media screen and (max-width: 1510px) {
           font-size: 70px;
@@ -54,7 +58,7 @@
         text-transform: uppercase;
         border: none;
         transition: 200ms;
-        font-family: 'Bruno';
+        font-family: "Bruno";
       }
 
       &-btn:hover {

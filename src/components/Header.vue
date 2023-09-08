@@ -4,14 +4,14 @@
             <router-link class="header__inner-logo" to="/">
                 <img src="@/assets/images/logo.svg" alt="">
             </router-link>
-            <ul class="header__inner-list" :class="{ active: burger }">
+            <ul class="header__inner-list" :class="{ active: burger }" @click.stop="">
                 <li class="header__inner-list-close" @click="burgerOff">
                     <img src="@/assets/images/close.svg" alt="">
                 </li>
                 <li><router-link @click="burger = false" to="/" class="header__inner-list-item">Home</router-link></li>
                 <li><router-link @click="burger = false" to="/like" class="header__inner-list-item">Selected
                         Products</router-link></li>
-                <li><router-link to="/payment" class="header__inner-list-item">Payment and
+                <li><router-link to="/payment" class="header__inner-list-item" @click="burger = false">Payment and
                         delivery</router-link></li>
                 <li @click="scrollToBottom" class="header__inner-list-item">Contacts</li>
             </ul>
@@ -21,16 +21,15 @@
                     <img src="@/assets/images/cart.svg" alt="" class="header__inner__right-cart">
                 </router-link>
                 <div class="burger">
-                    <img src="@/assets/images/burger.png" alt="" @click="burgerOn">
+                    <img src="@/assets/images/burger.png" alt="" @click.stop="burgerOn">
                 </div>
-                <!-- <button class="header__inner__right-btn"> Login </button> -->
             </div>
         </div>
     </nav>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useShopCart } from '@/stores/ShoppingCart.js'
 
 function scrollToBottom() {
@@ -39,10 +38,10 @@ function scrollToBottom() {
     burger.value = false
 }
 const shopCartStore = useShopCart()
+const burger = ref(false)
 const counter = computed(() => shopCartStore.shopsArr.length)
 const show = computed(() => counter.value == 0 ? false : true)
 
-const burger = ref(false)
 
 const burgerOn = () => {
     burger.value = true
@@ -51,5 +50,13 @@ const burgerOn = () => {
 const burgerOff = () => {
     burger.value = false
 }
+
+onMounted(() => {
+  document.addEventListener("click", burgerOff);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("click", burgerOff);
+});
 
 </script>

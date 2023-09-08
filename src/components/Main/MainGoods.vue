@@ -19,7 +19,7 @@
                     :class="{ active: item === page }" @click="paginateGoods(item)">
                     {{ item }}
                 </div>
-                <div href="#" class="mainGoods__inner__pagination-item" @click="plusPage">
+                <div href="#" class="mainGoods__inner__pagination-item" v-if="page < totalPages" @click="plusPage">
                     <img src="@/assets/images/nextPage.svg" alt="">
                 </div>
             </div>
