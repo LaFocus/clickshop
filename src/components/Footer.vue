@@ -8,12 +8,12 @@
                     <li class="footer__inner__nav__list-item">Payment and delivery</li>
                     <li class="footer__inner__nav__list-item">Product card</li>-->
                     <div>
-                        <li><router-link to="/" class="footer__inner__nav__list-item">Home</router-link></li>
-                        <li><router-link to="/like" class="footer__inner__nav__list-item">Selected Products</router-link></li>
+                        <li><router-link @click="scrollToTop" to="/" class="footer__inner__nav__list-item">Home</router-link></li>
+                        <li><router-link @click="scrollToTop" to="/like" class="footer__inner__nav__list-item">Selected Products</router-link></li>
                     </div>
                     <div>
-                        <li><router-link to="/payment" class="footer__inner__nav__list-item">Payment and delivery</router-link></li>
-                        <li><router-link  class="footer__inner__nav__list-item" to="/payment">Like</router-link></li>
+                        <li><router-link @click="scrollToTop" to="/payment" class="footer__inner__nav__list-item">Payment and delivery</router-link></li>
+                        <li><router-link @click="scrollToTop" class="footer__inner__nav__list-item" to="/productpage/shoppingcart">Shop</router-link></li>
                     </div>
                 </ul>
             </div>
@@ -31,7 +31,11 @@
 </template>
 
 <script setup>
+function scrollToTop() {
+    // let height = document.body.scrollHeight;
+    window.scroll(0, 0);
 
+}
 </script>
 
 <style lang="scss" scoped></style>

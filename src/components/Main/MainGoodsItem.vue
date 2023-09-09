@@ -41,15 +41,8 @@ const addItemtoShop = useShopCart()
 const addItemToShopANDLOCAL = (item) => {
     const storedItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
     const itemExists = storedItems.findIndex(storedItem => storedItem.id === item.id);
-    console.log(itemExists);
     if (itemExists !== -1) {
         cartFill.value.setAttribute('fill', '#030A8C');
-        console.log(cartFill.value);
-    } else {
-        cartFill.value.setAttribute('fill', '#000');
-
-        console.log(cartFill.value);
-
     }
     addItemtoShop.addItem(item, 1);
     localStorage.setItem('cartItems', JSON.stringify(addItemtoShop.shopsArr));
