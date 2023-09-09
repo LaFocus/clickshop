@@ -46,6 +46,11 @@
           font-style: normal;
           font-weight: 400;
           line-height: 15px;
+          
+          & span {
+            color: #030a8c;
+            font-size: 27px;
+          }
         }
 
         & input {
@@ -176,6 +181,7 @@
         & input {
           width: 25px;
           height: 25px;
+          cursor: pointer;
         }
 
         & span {

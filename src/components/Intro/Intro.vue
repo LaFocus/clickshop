@@ -5,11 +5,15 @@
                 <h2 class="intro__inner__info-logo">
                     iPhone 14 Pro Max
                 </h2>
-                <button class="intro__inner__info-btn">
-                    shop now
-                </button>
+                <router-link :to="`/productpage/2`">
+                    <button class="intro__inner__info-btn">
+                        shop now
+                    </button>
+                </router-link>
+
             </div>
-            <Swiper :slides-per-view="1" :space-between="50" :pagination="{ clickable: true }" :modules="modules" class="intro__inner__slider">
+            <Swiper :slides-per-view="1" :space-between="50" :pagination="{ clickable: true }" :modules="modules"
+                class="intro__inner__slider">
                 <Swiper-slide v-for="(item, i) in 3" :key="i" class="intro__inner__slider-item">
                     <img :src="getImageUrl(item)" alt="">
                 </Swiper-slide>

@@ -11,28 +11,28 @@
         <h3>Billing Address</h3>
         <form action="">
           <div class="payment__inner__forms-item">
-            <span>First Name *</span>
+            <span>First Name <span>*</span></span>
             <input type="text" v-bind="name">
             <pre>{{ errors.name }}</pre>
           </div>
           <div class="payment__inner__forms-item">
-            <span>Last Name *</span>
+            <span>Last Name <span>*</span></span>
             <input type="text" v-bind="lastname">
             <pre>{{ errors.lastname }}</pre>
 
           </div>
           <div class="payment__inner__forms-item">
-            <span>Country / Region *</span>
+            <span>Country / Region <span>*</span></span>
             <input type="text" v-bind="country" placeholder="Select a country / region">
             <pre>{{ errors.country }}</pre>
           </div>
           <div class="payment__inner__forms-item">
-            <span>Town / City *</span>
+            <span>Town / City <span>*</span></span>
             <input type="text" v-bind="town">
             <pre>{{ errors.town }}</pre>
           </div>
           <div class="payment__inner__forms-item payment__inner__forms-itemStreet">
-            <span>Street Address *</span>
+            <span>Street Address <span>*</span></span>
             <div>
               <input type="text" v-bind="adress" placeholder="House number and street name">
               <input type="text" placeholder="Appartment, suite, unit, etc. (optional)">
@@ -42,12 +42,12 @@
           <!-- <div class="payment__inner__forms-item">
             </div> -->
           <div class="payment__inner__forms-item">
-            <span>Email address *</span>
+            <span>Email address <span>*</span></span>
             <input type="text" v-bind="email">
             <pre>{{ errors.email }}</pre>
           </div>
           <div class="payment__inner__forms-item">
-            <span>Phone Number *</span>
+            <span>Phone Number <span>*</span></span>
             <div>
               <select name="" id="">
                 <option value="+998">+998</option>
@@ -236,11 +236,10 @@ const modalOn = () => {
     top: 0,
     behavior: 'smooth'
   });
-  // if (flag.value === true) {
-  //   window.addEventListener('scroll', e => {
-  //     window.scrollTo({ top: 0 })
-  //   })
-  // }
+  body.style.height = '100vh'
+  // console.log(body.style.height);
+  body.style.overflow = 'hidden'
+  // console.log(body.style.overflow);
 }
 
 const modalOff = () => {

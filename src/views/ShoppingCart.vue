@@ -58,8 +58,15 @@
             <div class="productCard__recommendations-title">
                 <h3>You may be interested in</h3>
             </div>
-            <div class="productCard__recommendations__goods">
-                <MainGoodsItem v-for="(item, i) in getIndexStore.slice(0, 4)" :key="i" :item="item" />
+            <div class="productCard__recommendations__goods" v-if="getIndexStore">
+                <Swiper :slides-per-view="1">
+                    <SwiperSlide class="productCard__recommendations__goods__slide">
+                        <MainGoodsItem v-for="(item, i) in getIndexStore.slice(0, 4)" :key="i" :item="item" />
+                    </SwiperSlide>
+                    <SwiperSlide class="productCard__recommendations__goods__slide">
+                        <MainGoodsItem v-for="(item, i) in getIndexStore.slice(4, 8)" :key="i" :item="item" />
+                    </SwiperSlide>
+                </Swiper>
             </div>
         </div>
     </div>
@@ -71,6 +78,9 @@ import OrdersItem from '@/components/Orders/OrderItem.vue'
 import { useIndex } from "@/stores/index.js";
 import { onMounted, computed, ref } from "vue";
 import { useShopCart } from "@/stores/ShoppingCart.js";
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import "swiper/scss";
+import 'swiper/scss/pagination';
 let getIndexStore = computed(() => indexStore.resArray)
 
 const indexStore = useIndex()
