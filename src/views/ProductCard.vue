@@ -56,10 +56,10 @@
             <div class="productCard__recommendations__goods" v-if="getIndexStore">
                 <Swiper :slides-per-view="1">
                     <SwiperSlide class="productCard__recommendations__goods__slide">
-                        <MainGoodsItem v-for="(item, i) in getIndexStore.slice(0, 4)" :key="i" :item="item" @click="reload" />
+                        <MainGoodsItem v-for="(item, i) in getIndexStore.slice(23, 27)" :key="i" :item="item" @click="reload" />
                     </SwiperSlide>
                     <SwiperSlide class="productCard__recommendations__goods__slide">
-                        <MainGoodsItem v-for="(item, i) in getIndexStore.slice(4, 8)" :key="i" :item="item" />
+                        <MainGoodsItem v-for="(item, i) in getIndexStore.slice(19, 23)" :key="i" :item="item" />
                     </SwiperSlide>
                 </Swiper>
             </div>

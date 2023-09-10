@@ -6,16 +6,16 @@
         Selected
     </div>
     <div class="selectedItems container">
-        <!-- <div class="selectedItems__item" v-for="(item, i) in selectedStore.selectedArr" :key="i"> -->
         <div class="selectedItems__item" v-for="(item, i) in localSelectedArr" :key="i">
             <div class="selectedItems__item__inner">
                 <div class="selectedItems__item__inner-img">
-                    <img :src="`${item.images[0]}`" alt="" class="selectedItems__item__inner-img-phone">
-                    <button @click="addItemtoShop.addItem(item, 1)">
+                    <router-link :to="`/productpage/${item.id}`">
+                        <img :src="`${item.images[0]}`" alt="" class="selectedItems__item__inner-img-phone">
+                    </router-link>
+                    <button @click.stop="addItemtoShop.addItem(item, 1)">
                         <img src="@/assets/images/cart.svg" alt="" class="mainGoodsItem__inner-img-cart">
                     </button>
-                    <!-- <button @click.stop="selectedStore.addDeleteItem(item)"> -->
-                    <button @click="deleteItem(item)">
+                    <button @click.stop="deleteItem(item)">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 24 20" fill="#030A8C"
                             class="mainGoodsItem__inner-img-like">
                             <path
@@ -25,9 +25,9 @@
                         </svg>
                     </button>
                 </div>
+
             </div>
         </div>
-        <!-- </div> -->
     </div>
 </template>
 
