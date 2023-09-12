@@ -84,8 +84,8 @@ import 'swiper/scss/pagination';
 let getIndexStore = computed(() => indexStore.resArray)
 
 const indexStore = useIndex()
-const shopCartStore = computed(() => useShopCart());
-const getItemsFromShop = computed(() => shopCartStore.value.shopsArr);
+const shopCartStore = useShopCart()
+const getItemsFromShop = computed(() => shopCartStore.shopsArr);
 let shippingPrice = ref(16)
 
 const getSubTotalPrice = () => {

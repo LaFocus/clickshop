@@ -33,7 +33,7 @@
                 <div class="productCard__inner__info__btns">
                     <div class="productCard__inner__info__btns__amount">
                         <button class="productCard__inner__info__btns__amount-btn" @click="changeAmount('-')">-</button>
-                        <span>{{ amount }}</span>
+                        <span>{{ getAmount() }}</span>
                         <button class="productCard__inner__info__btns__amount-btn" @click="changeAmount('+')">+</button>
                     </div>
                     <button class="productCard__inner__info__btns-order" @click="addItemtoShop.addItem(info, amount)">Buy
@@ -56,7 +56,8 @@
             <div class="productCard__recommendations__goods" v-if="getIndexStore">
                 <Swiper :slides-per-view="1">
                     <SwiperSlide class="productCard__recommendations__goods__slide">
-                        <MainGoodsItem v-for="(item, i) in getIndexStore.slice(23, 27)" :key="i" :item="item" @click="reload" />
+                        <MainGoodsItem v-for="(item, i) in getIndexStore.slice(23, 27)" :key="i" :item="item"
+                            @click="reload" />
                     </SwiperSlide>
                     <SwiperSlide class="productCard__recommendations__goods__slide">
                         <MainGoodsItem v-for="(item, i) in getIndexStore.slice(19, 23)" :key="i" :item="item" />
@@ -70,33 +71,39 @@
 <script setup>
 import MainGoodsItem from '@/components/Main/MainGoodsItem.vue';
 import { useIndex } from "@/stores/index.js";
-import { useShopCart } from "@/stores/ShoppingCart.js"
 import { onMounted, computed, ref } from "vue";
 import { useRoute } from "vue-router";
 import { useItemInfo } from "@/stores/itemInfo.js";
 import { Swiper, SwiperSlide } from 'swiper/vue';
+import { useShopCart } from "@/stores/ShoppingCart.js";
 import "swiper/scss";
 import 'swiper/scss/pagination';
 
-const indexStore = useIndex()
+const shopCartStore = useShopCart();
 const addItemtoShop = useShopCart()
+
+const indexStore = useIndex()
 const itemInfoStore = useItemInfo()
 const route = useRoute();
 
 const info = ref(null)
-const amount = ref(1)
 const currImage = ref(0)
 const thumbnails = ref(null)
 const id = route.params.id
 const likeFill = ref(null)
+const amount = ref(1)
 
 const getIndexStore = computed(() => indexStore.resArray)
 const itemInfo = computed(() => itemInfoStore.itemInfo)
 
-const changeAmount = (operator) => {
-    operator == '-' ? amount.value-- : operator == '+' ? amount.value++ : ''
-    amount.value == 0 ? amount.value = 1 : ''
-}
+const changeAmount = (op) => {
+  const item = info.value;
+  let amountFromCart = getAmount()
+  op == "-" ? amountFromCart-- : amountFromCart++
+  amountFromCart == 0 ? amountFromCart = 1 : ''
+  shopCartStore.deleteItem(item);
+  shopCartStore.addItem(item, amountFromCart);
+};
 const changeImage = (e, event) => {
     currImage.value = e
     const thumbnailsItems = event.target.closest(".productCard__inner__images__thumbnails-item");
@@ -108,7 +115,6 @@ const changeImage = (e, event) => {
         thumbnailsItems.classList.add("active");
     }
 }
-
 const itemToLocal = (e) => {
     const storedItems = JSON.parse(localStorage.getItem('itemsGoods') || '[]');
     const existingIndex = storedItems.findIndex(item => JSON.stringify(item) === JSON.stringify(e));
@@ -116,31 +122,34 @@ const itemToLocal = (e) => {
     if (existingIndex !== -1) {
         storedItems.splice(existingIndex, 1);
         likeFill.value.setAttribute('fill', '#fff');
-
     } else {
         storedItems.push(e);
         likeFill.value.setAttribute('fill', '#030A8C');
 
     }
-
     localStorage.setItem('itemsGoods', JSON.stringify(storedItems));
 };
+const reload = () => {
+    window.location.reload();
+}
 
 const fillValue = computed(() => {
     const storedItems = JSON.parse(localStorage.getItem('itemsGoods') || '[]');
-    console.log(storedItems)
     const itemExists = storedItems.some(item => JSON.stringify(item) === JSON.stringify(info.value));
     return itemExists ? "#030A8C" : "none";
 });
 
-const reload = () => {
-    window.location.reload();
+const getAmount = () => {
+    let shopsArrItem = shopCartStore.shopsArr.find((item) => item.id == info.value.id)
+    return shopsArrItem ? shopsArrItem.amount : 1
 }
+
 onMounted(async () => {
     await indexStore.getIndex()
     if (route.params.id) {
         await itemInfoStore.getItemInfo(id)
         info.value = itemInfo.value
     }
+    getAmount()
 })
 </script>

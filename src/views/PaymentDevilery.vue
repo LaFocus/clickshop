@@ -39,8 +39,6 @@
             </div>
             <pre>{{ errors.adress }}</pre>
           </div>
-          <!-- <div class="payment__inner__forms-item">
-            </div> -->
           <div class="payment__inner__forms-item">
             <span>Email address <span>*</span></span>
             <input type="text" v-bind="email">

@@ -33,6 +33,7 @@ const props = defineProps({
     }
 })
 
-const shopCartStore = computed(() => useShopCart())
+const shopCartStore = useShopCart()
+
 
 </script>

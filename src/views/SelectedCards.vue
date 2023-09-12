@@ -35,7 +35,7 @@
 import { computed, ref } from 'vue'
 import { useShopCart } from "@/stores/ShoppingCart.js"
 const addItemtoShop = useShopCart()
-const localSelectedArr = ref(JSON.parse(localStorage.itemsGoods) || [])
+const localSelectedArr = localStorage.length ? (ref(JSON.parse(localStorage.itemsGoods) || [])) : []
 
 const deleteItem = (e) => {
     const storedItems = JSON.parse(localStorage.getItem('itemsGoods')) || [];

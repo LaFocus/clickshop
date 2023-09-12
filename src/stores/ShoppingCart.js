@@ -21,6 +21,7 @@ export const useShopCart = defineStore('shopCart', {
             }
         },
         changeAmount(item, operator) {
+            console.log(item);
             operator === '-' ? item.amount-- : operator === '+' ? item.amount++ : '';
             if (item.amount === 0) {
                 const index = this.shopsArr.findIndex(cartItem => cartItem.id === item.id);
@@ -29,6 +30,7 @@ export const useShopCart = defineStore('shopCart', {
                     this.saveCartItems();
                 }
             }
+            this.saveCartItems();
         },
         saveCartItems() {
             localStorage.setItem('cartItems', JSON.stringify(this.shopsArr));
